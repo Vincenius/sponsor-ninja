@@ -1,0 +1,26 @@
+{
+  "name": "sponsor-ninja-widget",
+  "version": "1.0.0",
+  "description": "",
+  "private": true,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack",
+    "dev": "onchange \"src/**/*.js\" -- webpack --mode=development"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "dotenv": "^16.0.3",
+    "jss": "^10.9.2",
+    "jss-preset-default": "^10.9.2",
+    "onchange": "^7.1.0",
+    "webpack": "^5.75.0",
+    "webpack-cli": "^5.0.1"
+  },
+  "dependencies": {
+    "@dicebear/collection": "^5.0.2",
+    "@dicebear/core": "^5.0.2",
+    "circletype": "^2.3.0"
+  }
+}

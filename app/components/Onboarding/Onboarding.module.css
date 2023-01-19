@@ -1,0 +1,19 @@
+.donationContainer {
+  margin: 20px 0;
+}
+
+.info {
+  display: flex;
+  align-items: center;
+  margin: 1.5em 0;
+  background: #e3f2fd;
+}
+
+.info > * {
+  margin: 1em;
+}
+
+.tooltip {
+  text-decoration: underline;
+  font-style: italic;
+}
