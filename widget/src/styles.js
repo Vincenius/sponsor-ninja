@@ -30,6 +30,19 @@ const styles = {
   '@keyframes shine': {
     to: { backgroundPositionX: '-200%' }
   },
+  '@keyframes spin': {
+    '0%': {
+      transform: 'rotate(0)',
+      animationTimingFunction: 'cubic-bezier(.55,.055,.675,.19)',
+    },
+    '50%': {
+      transform: 'rotate(180deg)',
+      animationTimingFunction: 'cubic-bezier(.215,.61,.355,1)'
+    },
+    '100%': {
+      transform: 'rotate(360deg)'
+    }
+  },
   placeholder: {
     background: variables.grey,
     background: 'linear-gradient(110deg, #ececec 8%, #f5f5f5 18%, #ececec 33%)',
@@ -80,6 +93,34 @@ const styles = {
     '&:hover $circleTextBottom': {
       opacity: '1',
       transform: 'translateY(0%)'
+    },
+
+    '&:after': {
+      content: '""',
+      position: 'absolute',
+      width: 'calc(100% + 6px)',
+      height: 'calc(100% + 6px)',
+      top: '-3px',
+      left: '-3px',
+      zIndex: '-1',
+      background: 'transparent',
+      borderRadius: '100%',
+    },
+
+    '&[data-amount="5"]:after': {
+      background: 'linear-gradient(132deg, rgb(251, 251, 255) 0.00%, rgb(215, 223, 252) 100.00%)',
+    },
+
+    '&[data-amount="10"]:after': {
+      background: 'linear-gradient(135deg,#ADB2B4 0%,#44464A 135%)',
+    },
+
+    '&[data-amount="25"]:after': {
+      background: 'linear-gradient(132deg, rgb(31, 207, 195) 0.00%, rgb(31, 145, 207) 100.00%)',
+    },
+
+    '&[data-amount="50"]:after': {
+      background: 'linear-gradient(132deg, rgb(241, 242, 11) 0.00%, rgb(248, 161, 27) 100.00%)',
     },
   },
 
@@ -147,7 +188,7 @@ const styles = {
 
       '&:hover': {
         background: variables.middleGrey,
-      }
+      },
     },
 
     '& label': {
@@ -194,6 +235,26 @@ const styles = {
     background: `${variables.highlight} !important`,
     color: '#fff',
     marginTop: '16px',
+  },
+
+  loadingButton: {
+    position: 'relative',
+    opacity: '0.7',
+    cursor: 'pointer',
+
+    '&:after': {
+      position: 'absolute',
+      margin: 'auto',
+      content: '" "',
+      width: '12px',
+      height: '12px',
+      borderRadius: '50%',
+      borderWidth: '.25em',
+      borderColor: 'currentColor currentColor currentColor transparent',
+      borderStyle: 'solid',
+      marginLeft: '6px',
+      animation: '$spin 1s infinite'
+    }
   },
 
   modalCloseButton: {
@@ -275,6 +336,21 @@ const styles = {
     ...inputStyle
   },
 
+  info: {
+    margin: '0.5em 0',
+    color: variables.textColor,
+    fontSize: '0.8em',
+
+    '& a': {
+      color: variables.textColor,
+    },
+
+    '& a:hover': {
+      textDecoration: 'none',
+      opacity: '0.8',
+    }
+  },
+
   infoLink: {
     margin: '0.5em 0',
     color: variables.textColor,
@@ -290,6 +366,7 @@ const styles = {
   },
 
   circleImage: {
+    position: 'relative',
     width: '100%',
     height: '100%',
   }

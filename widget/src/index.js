@@ -9,6 +9,8 @@ import { uploadIcon } from './svgs.js'
 let container
 let sponsorNinjaProjectId
 let sponsorNinjaClientSecret
+let loading = false
+let stripe
 const random = getRandomInt(10000)
 
 // https://stripe.com/docs/payments/card-element
@@ -58,6 +60,7 @@ const previewCircle = ({ name, image = 0, website }) => {
     bottomText = `visit 🔗 `
   }
 
+  preview.dataset.amount = "10"
   preview.innerHTML = `
     <span class="${classes.circleImage}" id="sponsor-ninja-preview-image">${images[image]}</span>
     <span class="${classes.circleTextTop}">${name}</span>
@@ -121,6 +124,8 @@ const handleValueChange = elem => {
       e.classList.remove(classes.activeButton)
     }
   })
+  const preview = document.querySelector(`#sponsor-ninja-preview`)
+  preview.dataset.amount = newValue
 }
 
 const handleImageChange = (e, i) => {
@@ -171,7 +176,7 @@ const setupStripeForm = (value = 10) => {
   fetch(`${process.env.DOMAIN}/api/donate?id=${sponsorNinjaProjectId}&value=${value}`)
     .then(res => res.json())
     .then(donateData => {
-      const stripe = Stripe(donateData.user_public_key);
+      stripe = Stripe(donateData.user_public_key);
       sponsorNinjaClientSecret = donateData.client_secret
       const stripe_elements = stripe.elements();
       sponsorNinjaCardNumber = stripe_elements.create('cardNumber')
@@ -235,6 +240,10 @@ const addButton = ({ name }) => `<a href="#" id="sponsor-ninja-new-donation" cla
   </div>
 
   <button class="${classes.createButton}">Continue</button>
+
+  <div class="${classes.info}">
+    Powered by <a href="https://sponsor.ninja" target="_blank" rel="noopener noreferrer">sponsor.ninja</a> & <a href="https://stripe.com/" targer="_blank" rel="noopener noreferrer">Stripe</a>
+  </div>
 </div>`
 
 const openModal = e => {
@@ -317,7 +326,9 @@ const renderWidget = async ({ id, targetElem }) => {
         container.querySelector(`.${classes.createButton}`).innerHTML = 'Complete Payment'
         widgetState = 2
       }
-    } else {
+    } else if (widgetState === 2 && !loading){
+      loading = true
+      container.querySelector(`.${classes.createButton}`).classList.add(classes.loadingButton)
       const result = await stripe.confirmCardPayment(sponsorNinjaClientSecret, {
         payment_method: {
           card: sponsorNinjaCardNumber
@@ -330,6 +341,7 @@ const renderWidget = async ({ id, targetElem }) => {
         // TODO The payment succeeded!
       }
 
+      container.querySelector(`.${classes.createButton}`).classList.remove(classes.loadingButton)
       console.log({ result })
     }
   })

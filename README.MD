@@ -3,10 +3,16 @@
 todo readme
 
 todos
-- upload image preview
 
-- handle stripe stuff
-- show info "secure payment via Stripe"
+- handle stripe responses
 - show success screen
 
-- refactor to use less global variables & less document.queryselector
+- refactor to use window.SponsorNinja({ options }) to init widget
+- add tests
+
+- show donations in app dashboard
+- preview widget in app dashboard
+- edit and create new projects
+
+- dark mode
+- more payment methods
