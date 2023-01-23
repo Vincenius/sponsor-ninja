@@ -31,4 +31,5 @@
 # vercel
 /app/.vercel
 
+# more
 /widget/node_modules

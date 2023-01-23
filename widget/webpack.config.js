@@ -7,6 +7,9 @@ module.exports = {
   output: {
     filename: 'widget.js',
     path: path.resolve(__dirname, 'dist'),
+    library: 'SponsorNinja',
+    libraryTarget: 'var',
+    libraryExport: 'default',
   },
   plugins: [
     new DefinePlugin({

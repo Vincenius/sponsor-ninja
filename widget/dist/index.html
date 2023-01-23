@@ -8,11 +8,12 @@
   <body>
     <div id="widget-container"></div>
 
-    <script
-      src="widget.js"
-      id="sponsor-ninja-widget"
-      data-id="63bc49b189d97d532e5c86df"
-      data-target="#widget-container"
-    ></script>
+    <script src="./widget.js"></script>
+    <script>
+      SponsorNinja.init({
+        id: '63bc49b189d97d532e5c86df',
+        target: '#widget-container'
+      })
+    </script>
   </body>
 </html>

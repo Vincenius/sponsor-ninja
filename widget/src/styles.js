@@ -1,9 +1,3 @@
-import jss from 'jss'
-import preset from 'jss-preset-default'
-
-// https://github.com/juliangarnier/anime
-// https://tailwindui.com/?ref=top
-
 const variables = {
   lightGrey: 'rgba(51,65,85,.1)',
   middleGrey: 'rgb(248, 250, 252)',
@@ -20,10 +14,6 @@ const inputStyle = {
   border: `2px solid ${variables.lightGrey}`,
   marginBottom: '12px',
   width: '100%',
-}
-
-if (process.env.NODE_ENV !== 'test') {
-  jss.setup(preset())
 }
 
 const styles = {
@@ -385,7 +375,4 @@ const styles = {
   }
 }
 
-export default process.env.NODE_ENV !== 'test'
-  ? jss.createStyleSheet(styles).attach()
-  : { classes: Object.keys(styles).reduce((a, v) => ({ ...a, [v]: v}), {})  }
-  // maps to object like { button: 'button' ... } for testing purposes
+export default styles

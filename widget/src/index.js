@@ -1,3 +1,6 @@
+import jss from 'jss'
+import preset from 'jss-preset-default'
+
 import CircleType from 'circletype'
 import { createAvatar } from '@dicebear/core'
 import { funEmoji, identicon, initials } from '@dicebear/collection'
@@ -13,6 +16,7 @@ let sponsorNinjaClientSecret
 let loading = false
 let stripe
 let widgetState = 1 // 1 = basic data, 2 = payment data
+let classes
 const random = getRandomInt(10000)
 
 const avatar1 = createAvatar(funEmoji, { seed: random })
@@ -36,8 +40,6 @@ const values = {
   image: 0,
   file: '',
 }
-
-const { classes } = styles
 
 const updateCircleText = wrapper => {
   const circleTypeTop = new CircleType(wrapper.querySelector(`.${classes.circleTextTop}`))
@@ -202,8 +204,8 @@ const setupStripeForm = (value = 10) => {
 
 const addButton = ({ name }) => `<a href="#" id="sponsor-ninja-new-donation" class="${classes.donationCircle}">
   +
-  <span class="${classes.circleTextTop}">New Sponsor</span>
-  <span class="${classes.circleTextBottom}"></span>
+  <span class="${classes.circleTextTop}">Become a</span>
+  <span class="${classes.circleTextBottom}">Sponsor</span>
 </a>
 <div class="${classes.createModal}">
   <button class="${classes.modalCloseButton}">X</button>
@@ -285,7 +287,6 @@ const closeModal = () => {
   container.querySelector(`.${classes.createModal}`).classList.remove(classes.visible)
 
   if (widgetState === 3) {
-    console.log(container.querySelector(`.${classes.active}`), document.querySelectorAll(`.${classes.active}`))
     container.querySelector('#sponsor-ninja-preview').classList.remove(classes.active)
   } else {
     container.querySelector('#sponsor-ninja-preview').remove()
@@ -313,6 +314,10 @@ const createPendingDonation = async projectId => {
 }
 
 const renderWidget = async ({ id, targetElem }) => {
+  jss.setup(preset())
+  const attachedStyles = jss.createStyleSheet(styles).attach()
+  classes = attachedStyles.classes
+
   let stripeJs = document.createElement("script");
   stripeJs.type = "text/javascript";
   stripeJs.src = 'https://js.stripe.com/v3/';
@@ -415,24 +420,24 @@ const renderWidget = async ({ id, targetElem }) => {
   })
 }
 
-// validate and run
-const scriptTag = document.querySelector('script#sponsor-ninja-widget')
 
-if (!scriptTag) {
-  console.warn('Could not find sponsor ninja script - make sure to add the id="sponsor-ninja-widget" to the <script> tag')
-} else {
-  const { id, target } = scriptTag.dataset
-
-  if (!id || !target) {
-    console.warn('missing data attributes for sponsor-ninja-widget')
-  } else {
-    const targetElem = document.querySelector(target)
-    sponsorNinjaProjectId = id
-
-    if (!targetElem) {
-      console.warn('could not find target DOM element for sponsor-ninja-widget')
+export default {
+  init: ({
+    id,
+    target,
+  }) => {
+    if (!id || !target) {
+      console.warn('missing data attributes for sponsor-ninja-widget')
     } else {
-      renderWidget({ id, targetElem })
+      const targetElem = document.querySelector(target)
+      sponsorNinjaProjectId = id
+
+      if (!targetElem) {
+        console.warn('could not find target DOM element for sponsor-ninja-widget')
+      } else {
+        targetElem.innerHTML = '' // clear existing content
+        renderWidget({ id, targetElem })
+      }
     }
   }
 }

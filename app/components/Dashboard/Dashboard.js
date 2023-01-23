@@ -5,8 +5,9 @@ import ProjectCard from './ProjectCard'
 
 const Dashboard = ({ user }) => {
   return <div>
-    { user.projects.map(project =>
-      <ProjectCard key={project.id} project={project} />
+    { user.projects.map(project => <div key={project.id}>
+        <ProjectCard project={project} />
+      </div>
     )}
 
     {/* <Paper>

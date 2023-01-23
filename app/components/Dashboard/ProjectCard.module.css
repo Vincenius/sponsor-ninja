@@ -1,4 +1,6 @@
 .container {
   padding: 2em;
   margin: 2em 0;
+  display: flex;
+  column-gap: 2em;
 }
