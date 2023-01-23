@@ -202,7 +202,7 @@ const setupStripeForm = (value = 10) => {
     })
 }
 
-const addButton = ({ name }) => `<a href="#" id="sponsor-ninja-new-donation" class="${classes.donationCircle}">
+const addButton = ({ name }) => `<a id="sponsor-ninja-new-donation" class="${classes.donationCircle} ${classes.newDonation}">
   +
   <span class="${classes.circleTextTop}">Become a</span>
   <span class="${classes.circleTextBottom}">Sponsor</span>

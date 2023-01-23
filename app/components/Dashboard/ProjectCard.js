@@ -29,6 +29,7 @@ const ProjectCard = ({ project }) => {
         Embed the script on your website to start collecting donations.
       </Typography>
 
+      {/* TODO tabs for script / or npm  */}
       <CopyBlock
         text={getScript({ id: project._id })}
         language="html"
