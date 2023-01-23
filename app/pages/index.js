@@ -1,4 +1,5 @@
 import Head from 'next/head'
+
 import styles from '../styles/Home.module.css'
 import React from 'react'
 import { withSessionSsr } from "../lib/withSession"
@@ -34,7 +35,6 @@ export default function Home({ user }) {
         <meta name="description" content="Todo" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
-        <script src="/widget.js"></script>
       </Head>
       <main className={styles.main}>
         { !user.projects || !user.projects.length && <Onboarding user={user} /> }

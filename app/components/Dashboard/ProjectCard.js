@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import { CopyBlock, dracula } from "react-code-blocks"
+import { SponsorNinja } from '../../public/widget-npm'
 import Typography from '@mui/material/Typography'
 import Paper from '@mui/material/Paper'
 import styles from './ProjectCard.module.css'
@@ -15,10 +16,10 @@ const getScript = ({ id }) =>
 
 const ProjectCard = ({ project }) => {
   useEffect(() => {
-    window.SponsorNinja.init({
-      id: project._id,
-      target: `#container-${project._id}`
-    })
+      SponsorNinja.init({
+        id: project._id,
+        target: `#container-${project._id}`
+      })
   }, [])
 
   return <Paper className={styles.container}>
