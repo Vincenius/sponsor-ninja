@@ -58,6 +58,8 @@ const styles = {
     position: 'relative',
     display: 'flex',
     columnGap: '2em',
+    rowGap: '1.5em',
+    flexWrap: 'wrap',
     padding: '1em',
     fontFamily: 'Inter var, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji',
     boxSizing: 'border-box',
@@ -369,6 +371,17 @@ const styles = {
     position: 'relative',
     width: '100%',
     height: '100%',
+  },
+
+  successEmoji: {
+    fontSize: '4em',
+    textAlign: 'center',
+    display: 'inline-block',
+    width: '100%',
+  },
+
+  error: {
+    color: variables.error,
   }
 }
 

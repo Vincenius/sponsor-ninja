@@ -21,6 +21,7 @@
   "dependencies": {
     "@dicebear/collection": "^5.0.2",
     "@dicebear/core": "^5.0.2",
-    "circletype": "^2.3.0"
+    "circletype": "^2.3.0",
+    "party-js": "^2.2.0"
   }
 }

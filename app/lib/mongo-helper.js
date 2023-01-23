@@ -81,14 +81,65 @@ const getProjectByQuery = async query => {
   return result
 }
 
+const createDonation = async newDonation => {
+  let result
+
+  try {
+    const db = client.db(process.env.MONGODB_DATABASE)
+    const collection = db.collection(process.env.MONGODB_DONATION_COLLECTION)
+
+    result = await collection.insertOne(newDonation)
+  } catch (e) {
+    console.log('error on creating user', e)
+  }
+
+  return result
+}
+
+const getDonationByQuery = async query => {
+  let result = []
+
+  try {
+    const db = client.db(process.env.MONGODB_DATABASE)
+    const collection = db.collection(process.env.MONGODB_DONATION_COLLECTION)
+
+    result = await collection.find(query).toArray()
+  } catch (e) {
+    console.log('error on getting user', e)
+  }
+
+  return result
+}
+
+const updateDonationByQuery = async ({ query, update }) => {
+  let result
+
+  try {
+    const db = client.db(process.env.MONGODB_DATABASE)
+    const collection = db.collection(process.env.MONGODB_DONATION_COLLECTION)
+
+    result = await collection.findOneAndUpdate(query, { $set: update }, { returnDocument: 'after' })
+  } catch (e) {
+    console.log('error on updating user', e)
+  }
+
+  return result
+}
+
 const mongoHelper = {
   connectDb,
   disconnectDb,
+
   getUserByQuery,
   createUser,
   updateUserByQuery,
+
   createProject,
   getProjectByQuery,
+
+  createDonation,
+  getDonationByQuery,
+  updateDonationByQuery,
 }
 
 export default mongoHelper

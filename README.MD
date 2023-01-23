@@ -4,8 +4,7 @@ todo readme
 
 todos
 
-- handle stripe responses
-- show success screen
+- handle stripe error
 
 - refactor to use window.SponsorNinja({ options }) to init widget
 - add tests
@@ -15,4 +14,6 @@ todos
 - edit and create new projects
 
 - dark mode
+- email input for payment receipts
 - more payment methods
+- cron job to cleanup old pending donations

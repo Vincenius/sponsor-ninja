@@ -17,15 +17,11 @@ export const getImageDimensions = file => new Promise(resolve => {
   img.src = dataURL
 })
 
-export const getResizedImage = ({ imageSize, file, imageMaxSize }) =>
-  imageSize > 300
-    ? resizeImage({ file, width: imageMaxSize, height: imageMaxSize })
-    : Promise.resolve(file)
+export const getResizedImage = ({ file, imageMaxSize }) =>
+  resizeImage({ file, width: imageMaxSize, height: imageMaxSize })
 
 export const resizeImage = ({ file, width, height }) =>
   new Promise((resolve, reject) => {
-    const fileType = file.type;
-    const fileName = file.name;
     const reader = new FileReader();
 
     reader.onloadend = function() {
@@ -58,13 +54,9 @@ export const resizeImage = ({ file, width, height }) =>
         var ctx = canvas.getContext("2d");
         ctx.drawImage(this, 0, 0, imageWidth, imageHeight);
 
-        canvas.toBlob((blob) => {
-          // The resized file ready for upload
-          let file = new File([blob], fileName, { type: fileType })
-          resolve(file)
-        }, fileType);
+        resolve(canvas.toDataURL())
       }
     }
 
-    reader.readAsDataURL(file);
+    reader.readAsDataURL(file)
   })

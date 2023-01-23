@@ -1,9 +1,10 @@
 import CircleType from 'circletype'
 import { createAvatar } from '@dicebear/core'
 import { funEmoji, identicon, initials } from '@dicebear/collection'
+import party from 'party-js'
 
 import styles from './styles.js'
-import { isValidUrl, getRandomInt } from './utils.js'
+import { isValidUrl, getRandomInt, getResizedImage } from './utils.js'
 import { uploadIcon } from './svgs.js'
 
 let container
@@ -11,9 +12,8 @@ let sponsorNinjaProjectId
 let sponsorNinjaClientSecret
 let loading = false
 let stripe
+let widgetState = 1 // 1 = basic data, 2 = payment data
 const random = getRandomInt(10000)
-
-// https://stripe.com/docs/payments/card-element
 
 const avatar1 = createAvatar(funEmoji, { seed: random })
 const avatar2 = createAvatar(identicon, { seed: random })
@@ -24,9 +24,9 @@ let sponsorNinjaCardExpiry
 let sponsorNinjaCardCvc
 
 const images = [
-  avatar1.toString(),
-  avatar2.toString(),
-  avatar3.toString(),
+  avatar1,
+  avatar2,
+  avatar3,
 ]
 
 const values = {
@@ -34,6 +34,7 @@ const values = {
   name: 'Anonymous',
   website: null,
   image: 0,
+  file: '',
 }
 
 const { classes } = styles
@@ -46,11 +47,21 @@ const updateCircleText = wrapper => {
 }
 
 const previewCircle = ({ name, image = 0, website }) => {
+  const imageValue = image !== 3
+    ? images[image].toString()
+    : images[image]
+
+  const preview = getDonationCircle({ name, image: imageValue, website })
+  preview.id = 'sponsor-ninja-preview'
+  preview.classList.add(classes.active)
+
+  return preview
+}
+
+const getDonationCircle = ({ name, website, image, amount = '10' }) => {
   const preview = document.createElement('a')
 
-  preview.classList.add(classes.active)
   preview.classList.add(classes.donationCircle)
-  preview.id = 'sponsor-ninja-preview'
   let bottomText = ''
 
   if (website) {
@@ -60,9 +71,9 @@ const previewCircle = ({ name, image = 0, website }) => {
     bottomText = `visit 🔗 `
   }
 
-  preview.dataset.amount = "10"
+  preview.dataset.amount = amount
   preview.innerHTML = `
-    <span class="${classes.circleImage}" id="sponsor-ninja-preview-image">${images[image]}</span>
+    <span class="${classes.circleImage}" id="sponsor-ninja-preview-image">${image}</span>
     <span class="${classes.circleTextTop}">${name}</span>
     <span class="${classes.circleTextBottom}">${bottomText}</span>`
 
@@ -78,7 +89,7 @@ const handleNameChange = e => {
   updateCircleText(preview)
 
   const newInitials = createAvatar(initials, { seed: value })
-  const newAvatar = newInitials.toString()
+  const newAvatar = newInitials
   images[2] = newInitials
 
   document.querySelector('#sponsor-ninja-image-initials').innerHTML = newAvatar
@@ -130,7 +141,7 @@ const handleValueChange = elem => {
 
 const handleImageChange = (e, i) => {
   values.image = i
-  document.querySelector('#sponsor-ninja-preview-image').innerHTML = images[i]
+  document.querySelector('#sponsor-ninja-preview-image').innerHTML = images[i].toString()
 
   const imageButtons = document.querySelectorAll(`.${classes.imageContainer} > *`)
   Array.from(imageButtons).map((elem, index) => {
@@ -142,13 +153,17 @@ const handleImageChange = (e, i) => {
   })
 }
 
-const handleImageUpload = e => {
-  const src = URL.createObjectURL(e.target.files[0])
+const handleImageUpload = async e => {
+  const file = e.target.files[0]
+  const src = URL.createObjectURL(file)
 
   if (src) {
     images[3] = `<img src="${src}" alt="uploaded file preview" class="${classes.previewUploadImage}"/>`
 
     handleImageChange(null, 3)
+
+    const resizedFile = await getResizedImage({ file, imageMaxSize: 200 })
+    values.file = resizedFile
   }
 }
 
@@ -157,19 +172,15 @@ const shuffleImages = () => {
   const newEmoji = createAvatar(funEmoji, { seed: random });
   const newIdenticon = createAvatar(identicon, { seed: random });
 
-  const emojiString = newEmoji.toString()
-  const identiconString = newIdenticon.toString()
+  const emojiString = newEmoji
+  const identiconString = newIdenticon
 
   images[0] = emojiString
   images[1] = identiconString
 
-  document.querySelector('#sponsor-ninja-image-emoji').innerHTML = emojiString
-  document.querySelector('#sponsor-ninja-image-identicon').innerHTML = identiconString
-  document.querySelector('#sponsor-ninja-preview-image').innerHTML = images[values.image]
-}
-
-const validateWebsite = e => {
-  // todo validate and show warning if invalid
+  document.querySelector('#sponsor-ninja-image-emoji').innerHTML = emojiString.toString()
+  document.querySelector('#sponsor-ninja-image-identicon').innerHTML = identiconString.toString()
+  document.querySelector('#sponsor-ninja-preview-image').innerHTML = images[values.image].toString()
 }
 
 const setupStripeForm = (value = 10) => {
@@ -219,9 +230,9 @@ const addButton = ({ name }) => `<a href="#" id="sponsor-ninja-new-donation" cla
 
     <label>Image</label>
     <div class="${classes.imageContainer}">
-      <div id="sponsor-ninja-image-emoji" class="${classes.profileImage} ${classes.profileActive}">${images[0]}</div>
-      <div id="sponsor-ninja-image-identicon" class="${classes.profileImage}">${images[1]}</div>
-      <div id="sponsor-ninja-image-initials" class="${classes.profileImage}">${images[2]}</div>
+      <div id="sponsor-ninja-image-emoji" class="${classes.profileImage} ${classes.profileActive}">${images[0].toString()}</div>
+      <div id="sponsor-ninja-image-identicon" class="${classes.profileImage}">${images[1].toString()}</div>
+      <div id="sponsor-ninja-image-initials" class="${classes.profileImage}">${images[2].toString()}</div>
       <label for="sponsor-ninja-file-upload" id="sponsor-ninja-upload-image" class="${classes.profileImage} ${classes.uploadImage}">${uploadIcon}</label>
       <input id="sponsor-ninja-file-upload" accept="image/*" type="file" class="${classes.fileInput}"/>
     </div>
@@ -239,6 +250,13 @@ const addButton = ({ name }) => `<a href="#" id="sponsor-ninja-new-donation" cla
     <div id="sponsor-ninja-card-cvc" class="${classes.stripeInputContainer}"></div>
   </div>
 
+  <div id="sponsor-ninja-tab-3" class="${classes.hidden}">
+    <h3>Thank you for your donation</h3>
+    <span class="${classes.successEmoji}">💖</span>
+  </div>
+
+  <span class="${classes.info} ${classes.error}" id="sponsor-ninja-error-message"></span>
+
   <button class="${classes.createButton}">Continue</button>
 
   <div class="${classes.info}">
@@ -253,21 +271,48 @@ const openModal = e => {
     e.target.classList.add(classes.active)
     container.querySelector(`.${classes.createModal}`).classList.add(classes.visible)
 
-    const preview = previewCircle(values)
-    container.prepend(preview)
-    updateCircleText(container)
-    setupStripeForm(10)
+    if (widgetState !== 3) {
+      const preview = previewCircle(values)
+      container.prepend(preview)
+      updateCircleText(container)
+      setupStripeForm(10)
+    }
   }
 }
 
 const closeModal = () => {
   container.querySelector('#sponsor-ninja-new-donation').classList.remove(classes.active)
   container.querySelector(`.${classes.createModal}`).classList.remove(classes.visible)
-  container.querySelector('#sponsor-ninja-preview').remove()
+
+  if (widgetState === 3) {
+    console.log(container.querySelector(`.${classes.active}`), document.querySelectorAll(`.${classes.active}`))
+    container.querySelector('#sponsor-ninja-preview').classList.remove(classes.active)
+  } else {
+    container.querySelector('#sponsor-ninja-preview').remove()
+  }
+}
+
+const createPendingDonation = async projectId => {
+  const { paymentIntent } = await stripe.retrievePaymentIntent(sponsorNinjaClientSecret)
+
+  await fetch(`${process.env.DOMAIN}/api/donate?id=${projectId}`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      payment_id: paymentIntent.id,
+      data: {
+        name: values.name,
+        website: values.website,
+        avatar: values.image <= 2 && images[values.image].toString(),
+        image: values.image === 3 && values.file
+      },
+    })
+  }).then(res => res.json())
 }
 
 const renderWidget = async ({ id, targetElem }) => {
-  let widgetState = 1 // 1 = basic data, 2 = payment data
   let stripeJs = document.createElement("script");
   stripeJs.type = "text/javascript";
   stripeJs.src = 'https://js.stripe.com/v3/';
@@ -289,7 +334,21 @@ const renderWidget = async ({ id, targetElem }) => {
 
   // -- render add button & modal -- //
   container.innerHTML = addButton({ name: data.name })
-  updateCircleText(container)
+
+  for (const donation of data.donations) {
+    const preview = getDonationCircle({
+      name: donation.name,
+      website: donation.website,
+      image: donation.avatar || `<img src="${donation.image}" class="${classes.previewUploadImage}" alt="avatar of ${donation.name}"/>`,
+      amount: (donation.amount / 100).toString()
+    })
+    container.prepend(preview)
+  }
+
+  const donationCircles = container.querySelectorAll(`.${classes.donationCircle}`)
+  Array.from(donationCircles).map((el, i) => {
+    updateCircleText(el)
+  })
 
   // open modal
   container.querySelector('#sponsor-ninja-new-donation').addEventListener('click', openModal)
@@ -300,7 +359,6 @@ const renderWidget = async ({ id, targetElem }) => {
   // update content
   container.querySelector('#sponsor-ninja-name-input').addEventListener('input', handleNameChange, false)
   container.querySelector('#sponsor-ninja-website-input').addEventListener('input', handleWebsiteChange, false)
-  container.querySelector('#sponsor-ninja-website-input').addEventListener('change', validateWebsite)
   container.querySelector('#sponsor-ninja-shuffle-images').addEventListener('click', shuffleImages)
   container.querySelector('#sponsor-ninja-file-upload').addEventListener('change', handleImageUpload)
 
@@ -321,13 +379,16 @@ const renderWidget = async ({ id, targetElem }) => {
         container.querySelector('#sponsor-ninja-website-input').dataset.error = error
         container.querySelector('#sponsor-ninja-website-input+span').innerHTML = error
       } else {
+        createPendingDonation(id)
         container.querySelector('#sponsor-ninja-tab-1').classList.add(classes.hidden)
         container.querySelector('#sponsor-ninja-tab-2').classList.remove(classes.hidden)
         container.querySelector(`.${classes.createButton}`).innerHTML = 'Complete Payment'
         widgetState = 2
       }
     } else if (widgetState === 2 && !loading){
+      const errorContainer = document.querySelector('#sponsor-ninja-error-message')
       loading = true
+      errorContainer.innerHTML = ''
       container.querySelector(`.${classes.createButton}`).classList.add(classes.loadingButton)
       const result = await stripe.confirmCardPayment(sponsorNinjaClientSecret, {
         payment_method: {
@@ -336,13 +397,20 @@ const renderWidget = async ({ id, targetElem }) => {
       })
 
       if (result.error) {
-        // Show error to your customer)
+        errorContainer.innerHTML = result.error.message
       } else {
-        // TODO The payment succeeded!
+        const previewCircle = document.querySelector('#sponsor-ninja-preview')
+        party.confetti(previewCircle)
+        widgetState = 3
+        container.querySelector('#sponsor-ninja-tab-2').classList.add(classes.hidden)
+        container.querySelector('#sponsor-ninja-tab-3').classList.remove(classes.hidden)
+        container.querySelector(`.${classes.createButton}`).innerHTML = 'Close Modal'
       }
 
       container.querySelector(`.${classes.createButton}`).classList.remove(classes.loadingButton)
-      console.log({ result })
+      loading = false
+    } else if (widgetState === 3) {
+      closeModal()
     }
   })
 }

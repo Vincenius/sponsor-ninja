@@ -39,11 +39,14 @@ const getProject = async (req, res) => {
         origin: '*', // todo only users domain
         optionsSuccessStatus: 200,
       })
-      const donations = project.donations || []
+      const donations = await db.getDonationByQuery({ $and: [{ project_id: ObjectId(req.query.id) }, { status: 'paid' }] })
 
       return res.status(200).json({
         name: project.name,
-        donations,
+        donations: donations.map(d => ({
+          ...d.data,
+          amount: d.amount,
+        })),
       })
   }
 }
