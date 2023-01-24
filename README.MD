@@ -22,7 +22,7 @@ This is a webpack project that creates the widget.js that needs to be included o
 - dark mode
 - init variable to limit display of donations
 - minify and improve file size
-- npm package
+- proper npm package
 - email input for payment receipts
 - more payment methods
 - cron job to cleanup old pending donations

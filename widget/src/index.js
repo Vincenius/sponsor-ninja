@@ -202,12 +202,12 @@ const setupStripeForm = (value = 10) => {
     })
 }
 
-const addButton = ({ name }) => `<a id="sponsor-ninja-new-donation" class="${classes.donationCircle} ${classes.newDonation}">
+const addButton = ({ name, position }) => `<a id="sponsor-ninja-new-donation" class="${classes.donationCircle} ${classes.newDonation}">
   +
   <span class="${classes.circleTextTop}">Become a</span>
   <span class="${classes.circleTextBottom}">Sponsor</span>
 </a>
-<div class="${classes.createModal}">
+<div class="${classes.createModal} ${position === 'top' ? classes.topModal : ''}">
   <button class="${classes.modalCloseButton}">X</button>
   <h3>Your donation for<br/>${name}</h3>
 
@@ -313,7 +313,7 @@ const createPendingDonation = async projectId => {
   }).then(res => res.json())
 }
 
-const renderWidget = async ({ id, targetElem }) => {
+const renderWidget = async ({ id, targetElem, position }) => {
   jss.setup(preset())
   const attachedStyles = jss.createStyleSheet(styles).attach()
   classes = attachedStyles.classes
@@ -338,7 +338,7 @@ const renderWidget = async ({ id, targetElem }) => {
   const data = await fetch(`${process.env.DOMAIN}/api/project?id=${id}`).then(res => res.json())
 
   // -- render add button & modal -- //
-  container.innerHTML = addButton({ name: data.name })
+  container.innerHTML = addButton({ name: data.name, position })
 
   for (const donation of data.donations) {
     const preview = getDonationCircle({
@@ -425,6 +425,7 @@ export default {
   init: ({
     id,
     target,
+    position = 'bottom',
   }) => {
     if (!id || !target) {
       console.warn('missing data attributes for sponsor-ninja-widget')
@@ -436,7 +437,7 @@ export default {
         console.warn('could not find target DOM element for sponsor-ninja-widget')
       } else {
         targetElem.innerHTML = '' // clear existing content
-        renderWidget({ id, targetElem })
+        renderWidget({ id, targetElem, position })
       }
     }
   }

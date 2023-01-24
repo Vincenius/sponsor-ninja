@@ -219,6 +219,11 @@ const styles = {
     },
   },
 
+  topModal: {
+    bottom: '110px',
+    transform: 'translateY(0)',
+  },
+
   visible: {
     display: 'block',
   },
