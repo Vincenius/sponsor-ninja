@@ -15,6 +15,7 @@ This is a webpack project that creates the widget.js that needs to be included o
 
 - write readme
 - add tests
+- add notifications
 
 - show donations in app dashboard
 - edit and create new projects

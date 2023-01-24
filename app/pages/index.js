@@ -37,8 +37,8 @@ export default function Home({ user }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={styles.main}>
-        { !user.projects || !user.projects.length && <Onboarding user={user} /> }
-        { user.projects && <Dashboard user={user} />}
+        { (!user.projects || !user.projects.length) && <Onboarding user={user} /> }
+        { user.projects && user.projects.length && <Dashboard user={user} /> }
       </main>
     </>
   )

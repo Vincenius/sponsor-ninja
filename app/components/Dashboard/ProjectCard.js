@@ -20,7 +20,7 @@ const ProjectCard = ({ project }) => {
         id: project._id,
         target: `#container-${project._id}`
       })
-  }, [])
+  })
 
   return <Paper className={styles.container}>
     <div>
