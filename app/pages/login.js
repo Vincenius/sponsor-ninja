@@ -13,8 +13,8 @@ export default function Login() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={styles.main}>
-        <Image src="/logo.png" alt="Ninja logo" width={300} height={300} style={{ marginBottom: '3em' }}/>
-        <Button variant="outlined" href="/api/sign-up">
+        <Image src="/logo-text.png" alt="Ninja logo" width={300} height={300} style={{ marginBottom: '3em', height: 'auto' }}/>
+        <Button variant="contained" href="/api/sign-up">
           Sign-in with Stripe
         </Button>
       </main>

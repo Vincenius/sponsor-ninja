@@ -3,7 +3,19 @@ import '@fontsource/roboto/400.css'
 import '@fontsource/roboto/500.css'
 import '@fontsource/roboto/700.css'
 import '../styles/globals.css'
+import { ThemeProvider, createTheme } from '@mui/material/styles'
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: '#0ac3c5',
+      contrastText: '#fff'
+    }
+  }
+});
 
 export default function App({ Component, pageProps }) {
-  return <Component {...pageProps} />
+  return <ThemeProvider theme={theme}>
+    <Component {...pageProps} />
+  </ThemeProvider>
 }

@@ -175,6 +175,7 @@ const styles = {
     '& h3': {
       color: variables.darkTextColor,
       marginTop: '0',
+      marginBottom: '1em',
       fontWeight: '600',
       fontSize: '25px',
     },

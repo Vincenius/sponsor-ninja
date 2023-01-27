@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { CopyBlock, dracula } from "react-code-blocks"
-import { SponsorNinja } from '../../public/widget-npm'
+import { SponsorNinja } from '../../public/widget-npm-dev'
 import Typography from '@mui/material/Typography'
 import Paper from '@mui/material/Paper'
 import styles from './ProjectCard.module.css'
