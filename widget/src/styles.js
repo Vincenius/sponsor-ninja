@@ -9,11 +9,12 @@ const variables = {
 }
 
 const inputStyle = {
-  padding: '6px 12px',
+  padding: '10px 16px',
   borderRadius: '6px',
   border: `2px solid ${variables.lightGrey}`,
   marginBottom: '12px',
   width: '100%',
+  fontSize: '16px',
 }
 
 const styles = {
@@ -48,6 +49,7 @@ const styles = {
     position: 'relative',
     display: 'flex',
     justifyContent: 'center',
+    textAlign: 'left',
     columnGap: '2em',
     rowGap: '1.5em',
     flexWrap: 'wrap',
@@ -159,14 +161,14 @@ const styles = {
   createModal: {
     position: 'absolute',
     display: 'none',
-    padding: '10px',
+    padding: '16px',
     background: '#fff',
     bottom: '-10px',
     cursor: 'initial',
     width: '280px',
     transform: 'translateY(100%)',
-    boxShadow: '0px 3px 3px -2px rgba(0,0,0,0.2),0px 3px 4px 0px rgba(0,0,0,0.14),0px 1px 8px 0px rgba(0,0,0,0.12)',
-    borderRadius: '5px',
+    boxShadow: '0 8px 30px 10px rgba(0,0,0,.25),0 2px 10px rgba(0,0,0,.25)',
+    borderRadius: '16px',
     color: variables.textColor,
     zIndex: '1000',
 
@@ -174,8 +176,7 @@ const styles = {
       color: variables.darkTextColor,
       marginTop: '0',
       fontWeight: '600',
-      fontSize: '16px',
-      lineHeight: '24px',
+      fontSize: '25px',
     },
 
     '& button': {
@@ -192,8 +193,8 @@ const styles = {
     '& label': {
       display: 'block',
       color: variables.darkTextColor,
-      fontSize: '14px',
-      fontWeight: '500',
+      fontSize: '16px',
+      fontWeight: '400',
       marginBottom: '4px',
     },
 
@@ -234,10 +235,11 @@ const styles = {
 
   createButton: {
     width: '100%',
-    padding: '6px 12px',
+    padding: '10px 14px',
     background: `${variables.highlight} !important`,
     color: '#fff',
     marginTop: '16px',
+    fontSize: '16px'
   },
 
   loadingButton: {
@@ -266,7 +268,8 @@ const styles = {
     top: '6px',
     width: '26px',
     height: '26px',
-    borderRadius: '100%',
+    borderRadius: '100% !important',
+    fontWeight: 'bold',
   },
 
   buttonGroup: {
@@ -296,7 +299,8 @@ const styles = {
   },
 
   activeButton: {
-    borderColor: `${variables.highlight} !important`,
+    background: `${variables.highlight} !important`,
+    color: '#fff',
     borderWidth: '2px !important',
   },
 
@@ -342,7 +346,7 @@ const styles = {
   info: {
     margin: '0.5em 0',
     color: variables.textColor,
-    fontSize: '0.8em',
+    fontSize: '12px',
 
     '& a': {
       color: variables.textColor,
@@ -357,7 +361,7 @@ const styles = {
   infoLink: {
     margin: '0.5em 0',
     color: variables.textColor,
-    fontSize: '0.6em',
+    fontSize: '10px',
     textDecoration: 'underline',
     cursor: 'pointer',
     userSelect: 'none',
@@ -383,7 +387,11 @@ const styles = {
 
   error: {
     color: variables.error,
-  }
+  },
+
+  highlightText: {
+    borderBottom: `3px solid ${variables.highlight}`,
+  },
 }
 
 export default styles

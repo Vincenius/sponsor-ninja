@@ -209,7 +209,7 @@ const addButton = ({ name, position }) => `<a id="sponsor-ninja-new-donation" cl
 </a>
 <div class="${classes.createModal} ${position === 'top' ? classes.topModal : ''}">
   <button class="${classes.modalCloseButton}">X</button>
-  <h3>Your donation for<br/>${name}</h3>
+  <h3>Your donation for<br/><span class="${classes.highlightText}">${name}</span></h3>
 
   <div id="sponsor-ninja-tab-1">
     <div id="sponsor-ninja-amount-buttons" class="${classes.buttonGroup}">
@@ -222,12 +222,10 @@ const addButton = ({ name, position }) => `<a id="sponsor-ninja-new-donation" cl
       </button>
     </div>
 
-    <h3>Your depiction</h3>
-
-    <label>Display Name</label>
+    <label>Your Display Name (optional)</label>
     <input id="sponsor-ninja-name-input" type="text" maxlength="20" placeholder="Anonymous" />
 
-    <label>Website</label>
+    <label>Your Website (optional)</label>
     <input id="sponsor-ninja-website-input" type="text" placeholder="https://example.com" /><span></span>
 
     <label>Image</label>
