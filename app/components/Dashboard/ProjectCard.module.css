@@ -1,14 +1,26 @@
 .container {
-  padding: 2em;
   margin: 2em 0;
 }
 
 .topRow {
   display: flex;
+  padding: 2em;
   column-gap: 2em;
   margin-bottom: 1em;
 }
 
 .bottomRow {
+  position: relative;
+  padding: 2em;
   width: 100%;
+  background: #f5f5f5;
+}
+
+.previewText {
+  position: absolute;
+  top: 0;
+  left: 2em;
+  transform: translateY(-50%);
+  background: #f5f5f5;
+  padding: 0.5em 1em;
 }

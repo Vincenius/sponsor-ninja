@@ -8,7 +8,7 @@ import Button from '@mui/material/Button'
 
 import styles from './Header.module.css'
 
-const Header = () => {
+const Header = ({ showLogout }) => {
   return <header>
       <AppBar position="static" as="nav">
         <Toolbar className={styles.navContainer}>
@@ -16,7 +16,7 @@ const Header = () => {
             <Image src="/logo-text.png" alt="Ninja logo" width={50} height={50} className={styles.logo} />
           </Link>
 
-          <Button color="inherit" href="/api/logout">Logout</Button>
+          { showLogout && <Button color="inherit" href="/api/logout">Logout</Button> }
         </Toolbar>
       </AppBar>
   </header>

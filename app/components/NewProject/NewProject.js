@@ -22,7 +22,7 @@ const CssButtonGroup = styled(ButtonGroup)({
   backgroundColor: '#fff',
 });
 
-const NewProject = ({ title }) => {
+const NewProject = ({ title, redirect }) => {
   const router = useRouter()
   const [projectName, setProjectName] = useState('')
   const [contribution, setContribution] = useState(5)
@@ -49,10 +49,8 @@ const NewProject = ({ title }) => {
     fetch('/api/project', options)
       .then(() => {
         setIsLoading(false)
-        router.replace(router.asPath)
-        // TODO proper redirect??
+        router.replace('/')
       })
-      // .catch(err => ) todo
   }
 
   return <form onSubmit={handleSubmit}>

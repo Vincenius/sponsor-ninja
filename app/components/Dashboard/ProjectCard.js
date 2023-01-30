@@ -31,7 +31,7 @@ const ProjectCard = ({ project }) => {
       new SponsorNinja({
         id: project._id,
         target: `#container-${project._id}`,
-        stage: 'dev', // todo env
+        stage: process.env.NEXT_PUBLIC_STAGE,
       })
   })
 
@@ -64,6 +64,7 @@ const ProjectCard = ({ project }) => {
     </div>
 
     <div className={styles.bottomRow}>
+    <Typography className={styles.previewText} component="span">Preview</Typography>
       <div id={`container-${project._id}`}></div>
     </div>
   </Paper>

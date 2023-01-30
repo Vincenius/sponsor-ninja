@@ -38,7 +38,7 @@ const styles = {
     background: variables.grey,
     background: 'linear-gradient(110deg, #ececec 8%, #f5f5f5 18%, #ececec 33%)',
     backgroundSize: '200% 100%',
-    borderRadius: '64px', // todo small default
+    borderRadius: '64px',
     height: '64px',
     width: '64px',
     position: 'relative',
