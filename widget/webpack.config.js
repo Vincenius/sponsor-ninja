@@ -6,7 +6,7 @@ const jsConfig = {
   entry: './src/index.js',
   output: {
     filename: 'widget.js',
-    path: path.resolve(__dirname, 'dist'),
+    path: path.resolve(__dirname, ''),
     library: 'SponsorNinja',
     libraryTarget: 'var', // commonjs
     libraryExport: 'default',
@@ -21,8 +21,8 @@ const jsConfig = {
 const npmConfig = {
   entry: './src/index.js',
   output: {
-    filename: 'widget-npm.js',
-    path: path.resolve(__dirname, 'dist'),
+    filename: 'index.js',
+    path: path.resolve(__dirname, ''),
     library: 'SponsorNinja',
     libraryTarget: 'commonjs',
     libraryExport: 'default',

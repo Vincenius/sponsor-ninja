@@ -1,6 +1,14 @@
 .container {
   padding: 2em;
   margin: 2em 0;
+}
+
+.topRow {
   display: flex;
   column-gap: 2em;
+  margin-bottom: 1em;
+}
+
+.bottomRow {
+  width: 100%;
 }

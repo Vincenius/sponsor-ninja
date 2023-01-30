@@ -1,0 +1,16 @@
+.newContainer {
+  padding: 2em 1em;
+  cursor: pointer;
+}
+
+.newContainer:hover {
+  opacity: 0.8;
+}
+
+.newText {
+  text-decoration: none !important;
+}
+
+.icon {
+  font-size: 2em;
+}

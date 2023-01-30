@@ -1,47 +1,69 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
+import { SponsorNinja } from 'sponsor-ninja-widget'
 import { CopyBlock, dracula } from "react-code-blocks"
-import { SponsorNinja } from '../../public/widget-npm-dev'
 import Typography from '@mui/material/Typography'
 import Paper from '@mui/material/Paper'
+import Tabs from '@mui/material/Tabs'
+import Tab from '@mui/material/Tab'
 import styles from './ProjectCard.module.css'
 
 const getScript = ({ id }) =>
 `<script src="https://app.sponsor.ninja/widget.js"></script>
 <script>
-  SponsorNinja.init({
+  new SponsorNinja({
     id: '${id}',
     target: '#widget-container'
   })
 </script>`
 
+const getNpmScript = ({ id }) =>
+`// npm i sponsor-ninja-widget --save
+import { SponsorNinja } from 'sponsor-ninja-widget'
+
+new SponsorNinja({
+  id: '${id}',
+  target: '#widget-container'
+})`
+
 const ProjectCard = ({ project }) => {
+  const [tab, setTab] = useState(0)
   useEffect(() => {
-      SponsorNinja.init({
+      new SponsorNinja({
         id: project._id,
-        target: `#container-${project._id}`
+        target: `#container-${project._id}`,
+        stage: 'dev', // todo env
       })
   })
 
   return <Paper className={styles.container}>
-    <div>
-      <Typography variant="h4" component="h2" gutterBottom>{project.name}</Typography>
-      <Typography variant="subtitle1" component="p" gutterBottom>
-        Embed the script on your website to start collecting donations.
-      </Typography>
+    <div className={styles.topRow}>
+      <div>
+        <Typography variant="h4" component="h2" gutterBottom>{project.name}</Typography>
+        <Typography variant="subtitle1" component="p" gutterBottom>
+          Embed the script on your website to start collecting donations.<br/>
+          Check the <a href="https://github.com/Vincenius/sponsor-ninja" target="_blank" rel="noopener noreferrer">GitHub repository</a> for a more detailed documentation.
+        </Typography>
 
-      {/* TODO tabs for script / or npm  */}
-      <CopyBlock
-        text={getScript({ id: project._id })}
-        language="html"
-        wrapLines
-        theme={dracula}
-      />
-
-      {/* TODO options */}
+        <Tabs value={tab} onChange={(e, val) => setTab(val)} variant="fullWidth">
+          <Tab label="Via script" />
+          <Tab label="Via npm package" />
+        </Tabs>
+        { tab === 0 && <CopyBlock
+          text={getScript({ id: project._id })}
+          language="html"
+          wrapLines
+          theme={dracula}
+        /> }
+        { tab === 1 && <CopyBlock
+          text={getNpmScript({ id: project._id })}
+          language="javascript"
+          wrapLines
+          theme={dracula}
+        /> }
+      </div>
     </div>
 
-    <div>
-      <Typography variant="h4" component="h2" gutterBottom>Preview</Typography>
+    <div className={styles.bottomRow}>
       <div id={`container-${project._id}`}></div>
     </div>
   </Paper>

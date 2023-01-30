@@ -177,7 +177,7 @@ const styles = {
       marginTop: '0',
       marginBottom: '1em',
       fontWeight: '600',
-      fontSize: '25px',
+      fontSize: '21px',
     },
 
     '& button': {

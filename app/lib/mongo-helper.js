@@ -4,7 +4,7 @@ const uri = `mongodb+srv://${process.env.MONGODB_USER}:${process.env.MONGODB_PAS
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 })
 
 const connectDb = () => client.connect()
-const disconnectDb = () => client.close()
+const disconnectDb = () => setTimeout(() => { client.close() }, 2000)
 
 const getUserByQuery = async query => {
   let result = []

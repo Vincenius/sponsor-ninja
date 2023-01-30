@@ -41,7 +41,7 @@ const getProject = async (req, res) => {
       })
       const donations = await db.getDonationByQuery({ $and: [{ project_id: ObjectId(req.query.id) }, { status: 'paid' }] })
 
-      return res.status(200).json({
+      res.status(200).json({
         name: project.name,
         donations: donations.map(d => ({
           ...d.data,
@@ -52,8 +52,9 @@ const getProject = async (req, res) => {
 }
 
 async function projectRoute(req, res) {
+  await db.connectDb()
   if (req.method === 'GET' && req.query.id) {
-    return getProject(req, res)
+    await getProject(req, res)
   } else if (!req.session.user) {
     res.status(401).send()
   } else {
@@ -65,6 +66,7 @@ async function projectRoute(req, res) {
       res.status(404).send()
     }
   }
+  await db.disconnectDb()
 }
 
 export default withSessionRoute(projectRoute)

@@ -6,13 +6,13 @@ const stripe = StripeLib(process.env.STRIPE_SECRET_KEY)
 
 async function loginRoute(req, res) {
   try {
+    await db.connectDb()
     const response = await stripe.oauth.token({
       grant_type: 'authorization_code',
       code: req.query.code,
     })
 
     if (response && response.access_token && response.stripe_user_id) {
-      await db.connectDb()
       const [user] = await db.getUserByQuery({ 'stripe.stripe_user_id': response.stripe_user_id })
 
       if (user) {
@@ -41,6 +41,8 @@ async function loginRoute(req, res) {
   } catch(e) {
     console.log('error on redirect', e)
     res.redirect(303, '/login?error=true')
+  } finally {
+    await db.disconnectDb()
   }
 }
 

@@ -7,17 +7,15 @@ This is a Next.js application that handles the login and the creation of project
 
 ## widget
 
-This is a webpack project that creates the widget.js that needs to be included on the page for rendering
-
+This is a webpack project that creates the widget.js and the npm package, which needs to be included on the page
 
 
 ### todos
 
+- footer with twitter, github and contact page
 - write readme
 - add tests
 - add notifications
-- proper handling of dev and prod widgets
-- github link
 
 - show donations in app dashboard
 - edit and create new projects
@@ -25,7 +23,6 @@ This is a webpack project that creates the widget.js that needs to be included o
 - dark mode
 - init variable to limit display of donations
 - minify and improve file size
-- proper npm package
 - email input for payment receipts
 - more payment methods
 - cron job to cleanup old pending donations

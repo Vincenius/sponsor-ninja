@@ -1,7 +1,10 @@
 import React from 'react'
+import Link from 'next/link'
 import Paper from '@mui/material/Paper'
 import Typography from '@mui/material/Typography'
+import AddBoxIcon from '@mui/icons-material/AddBox'
 import ProjectCard from './ProjectCard'
+import styles from './Dashboard.module.css'
 
 const Dashboard = ({ user }) => {
   return <div>
@@ -10,11 +13,16 @@ const Dashboard = ({ user }) => {
       </div>
     )}
 
-    {/* <Paper>
-      <Typography variant="h4" component="h2" gutterBottom textAlign="center">
-        Create New Project (todo)
-      </Typography>
-    </Paper> */}
+    <Link href="/projects/new" className={styles.newText}>
+      <Paper className={styles.newContainer}>
+        <Typography variant="h4" component="h2" textAlign="center" gutterBottom>
+          Create New Project
+        </Typography>
+        <Typography variant="h4" component="p" textAlign="center">
+          <AddBoxIcon className={styles.icon} />
+        </Typography>
+      </Paper>
+    </Link>
   </div>
 }
 

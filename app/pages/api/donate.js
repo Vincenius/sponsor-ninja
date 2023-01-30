@@ -52,6 +52,7 @@ const submitDonation = async (req, res, project, user) => {
 }
 
 async function donateRoute(req, res) {
+  await db.connectDb()
   const [project] = await db.getProjectByQuery({ _id: ObjectId(req.query.id) })
   const [user] = await db.getUserByQuery({ _id: ObjectId(project.user_id) })
 
@@ -62,12 +63,13 @@ async function donateRoute(req, res) {
   })
 
   if (req.method === 'GET' && req.query.id && project && user) {
-    return getLink(req, res, project, user)
+    getLink(req, res, project, user)
   } else if (req.method === 'POST' && project && user) {
-    return submitDonation(req, res, project, user)
+    submitDonation(req, res, project, user)
   } else {
     res.status(404).send()
   }
+  await db.disconnectDb()
 }
 
 export default donateRoute

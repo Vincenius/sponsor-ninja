@@ -1,9 +1,7 @@
-import Head from 'next/head'
-
-import styles from '../styles/Home.module.css'
 import React from 'react'
+import Layout from '../components/Layout/Layout'
 import { withSessionSsr } from "../lib/withSession"
-import Onboarding from '../components/Onboarding/Onboarding'
+import NewProject from '../components/NewProject/NewProject'
 import Dashboard from '../components/Dashboard/Dashboard'
 
 export const getServerSideProps = withSessionSsr(
@@ -29,17 +27,9 @@ export const getServerSideProps = withSessionSsr(
 
 export default function Home({ user }) {
   return (
-    <>
-      <Head>
-        <title>Sponsor Ninja | Your Projects</title>
-        <meta name="description" content="Todo" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-      <main className={styles.main}>
-        { (!user.projects || !user.projects.length) && <Onboarding user={user} /> }
-        { user.projects && user.projects.length && <Dashboard user={user} /> }
-      </main>
-    </>
+    <Layout title="Dashboard">
+      { (!user.projects || !user.projects.length) && <NewProject user={user} title="Create your first project" /> }
+      { user.projects && user.projects.length && <Dashboard user={user} /> }
+    </Layout>
   )
 }

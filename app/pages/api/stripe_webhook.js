@@ -13,6 +13,7 @@ export const config = {
 };
 
 export default async function handler(req, res) {
+  await db.connectDb()
   if (req.method === 'POST') {
     const buf = await buffer(req)
     const sig = req.headers['stripe-signature'];
@@ -24,7 +25,6 @@ export default async function handler(req, res) {
     } catch (err) {
       console.log({ err })
       res.status(400).send(`Webhook Error: ${err.message}`);
-      return;
     }
 
     // Handle the event
@@ -43,6 +43,7 @@ export default async function handler(req, res) {
         // console.log(`Unhandled stripe event type ${event.type}`);
     }
 
-    return res.status(200).json()
+    res.status(200).json()
   }
+  await db.disconnectDb()
 }

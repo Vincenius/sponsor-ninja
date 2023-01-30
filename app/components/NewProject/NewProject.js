@@ -10,7 +10,7 @@ import Paper from '@mui/material/Paper'
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined'
 import CircularProgress from '@mui/material/CircularProgress'
 
-import styles from './Onboarding.module.css'
+import styles from './NewProject.module.css'
 
 const CssTextField = styled(TextField)({
   '& .MuiOutlinedInput-root': {
@@ -22,7 +22,7 @@ const CssButtonGroup = styled(ButtonGroup)({
   backgroundColor: '#fff',
 });
 
-const Onboarding = () => {
+const NewProject = ({ title }) => {
   const router = useRouter()
   const [projectName, setProjectName] = useState('')
   const [contribution, setContribution] = useState(5)
@@ -50,13 +50,14 @@ const Onboarding = () => {
       .then(() => {
         setIsLoading(false)
         router.replace(router.asPath)
+        // TODO proper redirect??
       })
       // .catch(err => ) todo
   }
 
   return <form onSubmit={handleSubmit}>
     <Typography variant="h2" component="h1" gutterBottom>
-      Create your first project
+      {title}
     </Typography>
 
     <CssTextField
@@ -119,4 +120,4 @@ const Onboarding = () => {
   </form>
 }
 
-export default Onboarding
+export default NewProject
