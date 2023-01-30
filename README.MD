@@ -23,6 +23,7 @@ This is a webpack project that creates the widget.js and the npm package, which 
   - dark mode
   - limit donations display
   - circle alignment
+  - primary color
 - minify and improve file size
 - email input for payment receipts
 - more payment methods
