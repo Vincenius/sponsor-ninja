@@ -2,7 +2,7 @@
 
 An easy & free way to collect sponsorships for your projects.
 
-You can self-host the project or use the web app on [https://sponsor.ninja]. No worries it's free (donation based)!
+You can self-host the project or use the web app on [sponsor.ninja](https://sponsor.ninja). No worries it's free (donation based)!
 
 ## app
 
@@ -14,7 +14,7 @@ This is a Next.js application that handles the login and the creation of project
 This is a webpack project that creates the widget.js and the npm package, which needs to be included on the page
 
 
-### todos
+### next todos
 
 - write proper readme
 - edit and delete projects
@@ -28,3 +28,14 @@ This is a webpack project that creates the widget.js and the npm package, which 
 - more payment methods
 - cron job to cleanup old pending donations
 - add tests
+
+
+
+## License
+[MIT](https://choosealicense.com/licenses/mit/)
+
+
+---
+
+
+*created by [Vincent Will](https://twitter.com/wweb_dev)*
