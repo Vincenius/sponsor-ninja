@@ -4,9 +4,9 @@ import db from '../../lib/mongo-helper'
 import { withSessionRoute } from '../../lib/withSession'
 
 const createProject = async (req, res) => {
-  const { name, contribution } = req.body
+  const { name, contribution = 0 } = req.body
 
-  if (!name || !contribution) {
+  if (!name) {
     res.status(500).send()
   } else {
     await db.createProject({
