@@ -16,8 +16,6 @@ This is a webpack project that creates the widget.js and the npm package, which 
 
 ### todos
 
-- footer with twitter, github and contact page
-- redirect after create project
 - write proper readme
 - add notifications
 - edit and delete projects
