@@ -12,7 +12,8 @@ const getScript = ({ id }) =>
 <script>
   new SponsorNinja({
     id: '${id}',
-    target: '#widget-container'
+    target: '#widget-container',
+    position: 'top' // default = 'bottom'
   })
 </script>`
 
@@ -23,6 +24,7 @@ import { SponsorNinja } from 'sponsor-ninja-widget'
 new SponsorNinja({
   id: '${id}',
   target: '#widget-container'
+  position: 'top' // default = 'bottom'
 })`
 
 const ProjectCard = ({ project }) => {
@@ -32,6 +34,7 @@ const ProjectCard = ({ project }) => {
         id: project._id,
         target: `#container-${project._id}`,
         stage: process.env.NEXT_PUBLIC_STAGE,
+        position: 'top',
       })
   })
 

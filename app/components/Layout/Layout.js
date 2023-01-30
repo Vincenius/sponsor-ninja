@@ -20,14 +20,14 @@ const Layout = ({ children, title, showLogout = true }) => {
     </main>
     <footer className={styles.footer}>
       <div className={styles.footerInner}>
-        <div>
+        <div className={styles.footerLeft}>
           <Typography>© {new Date().getFullYear()} Sponsor Ninja</Typography>
-          <Typography>by <a href="https://twitter.com/wweb_dev" target="_blank" rel="noopener noreferrer">@wweb_dev</a></Typography>
+          <Typography>By <a href="https://twitter.com/wweb_dev" target="_blank" rel="noopener noreferrer">@wweb_dev</a></Typography>
         </div>
         <div>
           <Typography><Link href="https://github.com/Vincenius/sponsor-ninja">GitHub</Link></Typography>
-          <Typography><Link href="https://twitter.com/wweb_dev">Twitter</Link></Typography>
           <Typography><Link href="mailto:info@wweb.dev">Email</Link></Typography>
+          <Typography><Link href="/terms">Terms & Conditions</Link></Typography>
         </div>
       </div>
     </footer>

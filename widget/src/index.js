@@ -95,7 +95,7 @@ class SponsorNinja {
   }
   handleNameChange = e => {
     const value = e.target.value || 'Anonymous'
-    const preview = this.domContainer.querySelector(`#sponsor-ninja-preview`)
+    const preview = this.domContainer.querySelector(`.sponsor-ninja-preview`)
     const previewName = preview.querySelector(`.${classes.circleTextTop}`)
 
     previewName.innerHTML = value

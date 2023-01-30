@@ -2,7 +2,7 @@
 
 An easy & free way to collect sponsorships for your projects.
 
-You can self-host the project or use the web platform on [https://sponsor.ninja]. No worries it's free (donation based)!
+You can self-host the project or use the web app on [https://sponsor.ninja]. No worries it's free (donation based)!
 
 ## app
 

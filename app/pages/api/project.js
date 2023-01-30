@@ -22,6 +22,13 @@ const createProject = async (req, res) => {
     }
     await req.session.save()
 
+    if (process.env.NOTIFICATION_URL) {
+      fetch(`https://ntfy.sh/${process.env.NOTIFICATION_URL}`, {
+        method: 'POST',
+        body: `Sponsor Ninja Project: ${name}`
+      })
+    }
+
     res.status(201).send()
   }
 }
