@@ -17,7 +17,6 @@ This is a webpack project that creates the widget.js and the npm package, which 
 ### todos
 
 - write proper readme
-- add notifications
 - edit and delete projects
 - static html export of circles for email newsletter embed
 - more widget options
