@@ -6,7 +6,7 @@ import { createAvatar } from '@dicebear/core'
 import { funEmoji, identicon, initials } from '@dicebear/collection'
 import party from 'party-js'
 
-import styles from './styles.js'
+import getStyles from './styles.js'
 import { isValidUrl, getRandomInt, getResizedImage } from './utils.js'
 import { uploadIcon } from './svgs.js'
 
@@ -18,8 +18,12 @@ class SponsorNinja {
     id,
     target,
     position = 'bottom',
-    stage = 'prod'
+    stage = 'prod',
+    color = '#0ac3c5',
+    alignment = 'center',
   }) {
+    this.color = color
+    this.alignment = alignment
     this.widgetState = 1;
     this.images = [
       createAvatar(funEmoji, { seed: random }),
@@ -313,6 +317,10 @@ class SponsorNinja {
   }
   renderWidget = async ({ id, targetElem, position }) => {
     jss.setup(preset())
+    const styles = getStyles({
+      variables: { highlight: this.color },
+      alignment: this.alignment,
+    })
     const attachedStyles = jss.createStyleSheet(styles).attach()
     classes = attachedStyles.classes
 
