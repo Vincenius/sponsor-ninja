@@ -48,7 +48,6 @@ This is a webpack project that creates the widget.js and the npm package, which 
 
 ### next todos
 
-- write proper readme
 - edit and delete projects
 - static html export of circles for email newsletter embed
 - more widget options
@@ -58,6 +57,7 @@ This is a webpack project that creates the widget.js and the npm package, which 
 - email input for payment receipts
 - more payment methods
 - cron job to cleanup old pending donations
+- a hosted page that displays the donations?
 - add tests
 
 
