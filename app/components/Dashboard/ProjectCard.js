@@ -23,7 +23,7 @@ import { SponsorNinja } from 'sponsor-ninja-widget'
 
 new SponsorNinja({
   id: '${id}',
-  target: '#widget-container'
+  target: '#widget-container',
   position: 'top' // default = 'bottom'
 })`
 
