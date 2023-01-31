@@ -91,6 +91,8 @@ const getStyles = (props = {}) => {
 
       '& svg': {
         borderRadius: '64px',
+        width: '100%',
+        height: '100%',
       },
 
       '&:hover $circleTextTop': {
@@ -325,6 +327,11 @@ const getStyles = (props = {}) => {
       borderRadius: '22px',
       overflow: 'hidden',
       cursor: 'pointer',
+
+      '& svg': {
+        width: '100%',
+        height: '100%',
+      },
     },
 
     profileActive: {
