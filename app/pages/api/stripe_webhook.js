@@ -37,6 +37,13 @@ export default async function handler(req, res) {
           update: { status: 'paid', amount: paymentIntent.amount }
         })
 
+        if (process.env.NOTIFICATION_URL) {
+          await fetch(`https://ntfy.sh/${process.env.NOTIFICATION_URL}`, {
+            method: 'POST',
+            body: `💰 Sponsor Ninja Donation received ${paymentIntent.amount}`
+          })
+        }
+
         console.log('successfully updated payment', paymentIntent.id)
         break;
       default:
