@@ -115,6 +115,7 @@ const getStyles = (props = {}) => {
         zIndex: '-1',
         background: 'transparent',
         borderRadius: '100%',
+        zIndex: '0',
       },
 
       '&[data-amount="5"]:after': {
@@ -393,6 +394,7 @@ const getStyles = (props = {}) => {
       position: 'relative',
       width: '100%',
       height: '100%',
+      zIndex: '1',
     },
 
     successEmoji: {
