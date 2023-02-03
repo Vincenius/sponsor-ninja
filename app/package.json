@@ -25,7 +25,7 @@
     "react": "18.2.0",
     "react-code-blocks": "^0.0.9-0",
     "react-dom": "18.2.0",
-    "sponsor-ninja-widget": "^1.0.6",
+    "sponsor-ninja-widget": "^1.0.8",
     "stripe": "^11.6.0",
     "uuid": "^9.0.0"
   }

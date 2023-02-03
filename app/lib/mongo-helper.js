@@ -1,19 +1,22 @@
 import { MongoClient, ServerApiVersion } from 'mongodb'
 
 const uri = `mongodb+srv://${process.env.MONGODB_USER}:${process.env.MONGODB_PASSWORD}@cluster0.p6yfpiv.mongodb.net/?retryWrites=true&w=majority`
-const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 })
 
-const connectDb = () => client.connect()
-const disconnectDb = () => setTimeout(() => { client.close() }, 5000)
+const connectDb = () => {
+  const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 })
+  return client.connect()
+}
 
 const getUserByQuery = async query => {
   let result = []
 
   try {
-    const db = client.db(process.env.MONGODB_DATABASE)
+    const dbClient = await connectDb()
+    const db = dbClient.db(process.env.MONGODB_DATABASE)
     const collection = db.collection(process.env.MONGODB_USER_COLLECTION)
 
     result = await collection.find(query).toArray()
+    await dbClient.close()
   } catch (e) {
     console.log('error on getting user', e)
   }
@@ -25,10 +28,12 @@ const createUser = async newUser => {
   let result
 
   try {
-    const db = client.db(process.env.MONGODB_DATABASE)
+    const dbClient = await connectDb()
+    const db = dbClient.db(process.env.MONGODB_DATABASE)
     const collection = db.collection(process.env.MONGODB_USER_COLLECTION)
 
     result = await collection.insertOne(newUser)
+    await dbClient.close()
   } catch (e) {
     console.log('error on creating user', e)
   }
@@ -40,10 +45,12 @@ const updateUserByQuery = async ({ query, update }) => {
   let result
 
   try {
-    const db = client.db(process.env.MONGODB_DATABASE)
+    const dbClient = await connectDb()
+    const db = dbClient.db(process.env.MONGODB_DATABASE)
     const collection = db.collection(process.env.MONGODB_USER_COLLECTION)
 
     result = await collection.findOneAndUpdate(query, { $set: update }, { returnDocument: 'after' })
+    await dbClient.close()
   } catch (e) {
     console.log('error on updating user', e)
   }
@@ -55,10 +62,12 @@ const createProject = async newProject => {
   let result
 
   try {
-    const db = client.db(process.env.MONGODB_DATABASE)
+    const dbClient = await connectDb()
+    const db = dbClient.db(process.env.MONGODB_DATABASE)
     const collection = db.collection(process.env.MONGODB_PROJECT_COLLECTION)
 
     result = await collection.insertOne(newProject)
+    await dbClient.close()
   } catch (e) {
     console.log('error on creating user', e)
   }
@@ -70,10 +79,12 @@ const getProjectByQuery = async query => {
   let result = []
 
   try {
-    const db = client.db(process.env.MONGODB_DATABASE)
+    const dbClient = await connectDb()
+    const db = dbClient.db(process.env.MONGODB_DATABASE)
     const collection = db.collection(process.env.MONGODB_PROJECT_COLLECTION)
 
     result = await collection.find(query).toArray()
+    await dbClient.close()
   } catch (e) {
     console.log('error on getting user', e)
   }
@@ -85,10 +96,12 @@ const createDonation = async newDonation => {
   let result
 
   try {
-    const db = client.db(process.env.MONGODB_DATABASE)
+    const dbClient = await connectDb()
+    const db = dbClient.db(process.env.MONGODB_DATABASE)
     const collection = db.collection(process.env.MONGODB_DONATION_COLLECTION)
 
     result = await collection.insertOne(newDonation)
+    await dbClient.close()
   } catch (e) {
     console.log('error on creating user', e)
   }
@@ -100,10 +113,12 @@ const getDonationByQuery = async query => {
   let result = []
 
   try {
-    const db = client.db(process.env.MONGODB_DATABASE)
+    const dbClient = await connectDb()
+    const db = dbClient.db(process.env.MONGODB_DATABASE)
     const collection = db.collection(process.env.MONGODB_DONATION_COLLECTION)
 
     result = await collection.find(query).toArray()
+    await dbClient.close()
   } catch (e) {
     console.log('error on getting user', e)
   }
@@ -115,10 +130,12 @@ const updateDonationByQuery = async ({ query, update }) => {
   let result
 
   try {
-    const db = client.db(process.env.MONGODB_DATABASE)
+    const dbClient = await connectDb()
+    const db = dbClient.db(process.env.MONGODB_DATABASE)
     const collection = db.collection(process.env.MONGODB_DONATION_COLLECTION)
 
     result = await collection.findOneAndUpdate(query, { $set: update }, { returnDocument: 'after' })
+    await dbClient.close()
   } catch (e) {
     console.log('error on updating user', e)
   }
@@ -128,7 +145,6 @@ const updateDonationByQuery = async ({ query, update }) => {
 
 const mongoHelper = {
   connectDb,
-  disconnectDb,
 
   getUserByQuery,
   createUser,

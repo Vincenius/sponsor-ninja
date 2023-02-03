@@ -6,7 +6,6 @@ const stripe = StripeLib(process.env.STRIPE_SECRET_KEY)
 
 async function loginRoute(req, res) {
   try {
-    await db.connectDb()
     const response = await stripe.oauth.token({
       grant_type: 'authorization_code',
       code: req.query.code,
@@ -41,8 +40,6 @@ async function loginRoute(req, res) {
   } catch(e) {
     console.log('error on redirect', e)
     res.redirect(303, '/login?error=true')
-  } finally {
-    await db.disconnectDb()
   }
 }
 

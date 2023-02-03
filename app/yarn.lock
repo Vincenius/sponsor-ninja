@@ -1514,6 +1514,11 @@
   "resolved" "https://registry.npmjs.org/@rushstack/eslint-patch/-/eslint-patch-1.2.0.tgz"
   "version" "1.2.0"
 
+"@stripe/stripe-js@^1.46.0":
+  "integrity" "sha512-dkm0zCEoRLu5rTnsIgwDf/QG2DKcalOT2dk1IVgMySOHWTChLyOvQwMYhEduGgLvyYWTwNhAUV4WOLPQvjwLwA=="
+  "resolved" "https://registry.npmjs.org/@stripe/stripe-js/-/stripe-js-1.46.0.tgz"
+  "version" "1.46.0"
+
 "@swc/helpers@0.4.14":
   "integrity" "sha512-4C7nX/dvpzB7za4Ql9K81xK3HPxCpHMgwTZVyf+9JQ6VUbn9jjZVN7/Nkdz/Ugzs2CSjqnL/UPXroiVBVHUWUw=="
   "resolved" "https://registry.npmjs.org/@swc/helpers/-/helpers-0.4.14.tgz"
@@ -3918,13 +3923,14 @@
   dependencies:
     "memory-pager" "^1.0.2"
 
-"sponsor-ninja-widget@^1.0.6":
-  "integrity" "sha512-7Z2yZ0OqXcsEHc7uXWEX3sb5A31m0sA87IVz1kfI0J6RDUOtyk6K2FNhVwgOk3R8E6xO8WlpRIQopnSkE9qGfw=="
-  "resolved" "https://registry.npmjs.org/sponsor-ninja-widget/-/sponsor-ninja-widget-1.0.6.tgz"
-  "version" "1.0.6"
+"sponsor-ninja-widget@^1.0.8":
+  "integrity" "sha512-D4L2pMJm4kCCzc4Qjq4r8t0Z0UcHLuHaIs10lcRz3FtzR3wZhL8jtvceScfcwXHelbDsuHknlEZbtmegssh2kA=="
+  "resolved" "https://registry.npmjs.org/sponsor-ninja-widget/-/sponsor-ninja-widget-1.0.8.tgz"
+  "version" "1.0.8"
   dependencies:
     "@dicebear/collection" "^5.0.2"
     "@dicebear/core" "^5.0.2"
+    "@stripe/stripe-js" "^1.46.0"
     "circletype" "^2.3.0"
     "party-js" "^2.2.0"
 

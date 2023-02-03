@@ -1,6 +1,7 @@
 import jss from 'jss'
 import preset from 'jss-preset-default'
 
+import { loadStripe } from '@stripe/stripe-js/pure'
 import CircleType from 'circletype'
 import { createAvatar } from '@dicebear/core'
 import { funEmoji, identicon, initials } from '@dicebear/collection'
@@ -197,8 +198,8 @@ class SponsorNinja {
   setupStripeForm = (value = 10) => {
     fetch(`${this.DOMAIN}/api/donate?id=${this.projectId}&value=${value}`)
       .then(res => res.json())
-      .then(donateData => {
-        this.stripe = Stripe(donateData.user_public_key);
+      .then(async donateData => {
+        this.stripe = await loadStripe(donateData.user_public_key);
         this.clientSecret = donateData.client_secret
         const stripe_elements = this.stripe.elements();
         this.sponsorNinjaCardNumber = stripe_elements.create('cardNumber')
@@ -297,6 +298,11 @@ class SponsorNinja {
     }
   }
   createPendingDonation = async projectId => {
+    while (!this.stripe) {
+      // waiting for stripe to load
+      await new Promise(resolve => setTimeout(resolve, 1000))
+    }
+
     const { paymentIntent } = await this.stripe.retrievePaymentIntent(this.clientSecret)
 
     await fetch(`${this.DOMAIN}/api/donate?id=${projectId}`, {
@@ -323,13 +329,6 @@ class SponsorNinja {
     })
     const attachedStyles = jss.createStyleSheet(styles).attach()
     classes = attachedStyles.classes
-
-    if (!document.querySelectorAll('[src="https://js.stripe.com/v3/"]').length) {
-      let stripeJs = document.createElement("script");
-      stripeJs.type = "text/javascript";
-      stripeJs.src = 'https://js.stripe.com/v3/';
-      document.body.appendChild(stripeJs);
-    }
 
     targetElem.classList.add(classes.container)
 

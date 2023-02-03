@@ -1,6 +1,6 @@
 {
   "name": "sponsor-ninja-widget",
-  "version": "1.0.6",
+  "version": "1.0.8",
   "description": "",
   "homepage": "https://github.com/Vincenius/sponsor-ninja",
   "repository": {
@@ -26,6 +26,7 @@
   "dependencies": {
     "@dicebear/collection": "^5.0.2",
     "@dicebear/core": "^5.0.2",
+    "@stripe/stripe-js": "^1.46.0",
     "circletype": "^2.3.0",
     "party-js": "^2.2.0"
   }

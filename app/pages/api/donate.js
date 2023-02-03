@@ -27,7 +27,7 @@ const getLink = async (req, res, project, user) => {
     stripeAccount: user.stripe.stripe_user_id,
   });
 
-  res.status(200).json({
+  return res.status(200).json({
     client_secret: paymentIntent.client_secret,
     user_public_key: user.stripe.stripe_publishable_key,
     payment_intent_id: paymentIntent.id,
@@ -48,11 +48,10 @@ const submitDonation = async (req, res, project, user) => {
 
   await db.createDonation(newDonation)
 
-  res.status(200).json({ ok: true })
+  return res.status(200).json({ ok: true })
 }
 
 async function donateRoute(req, res) {
-  await db.connectDb()
   const [project] = await db.getProjectByQuery({ _id: ObjectId(req.query.id) })
   const [user] = await db.getUserByQuery({ _id: ObjectId(project.user_id) })
 
@@ -63,13 +62,12 @@ async function donateRoute(req, res) {
   })
 
   if (req.method === 'GET' && req.query.id && project && user) {
-    getLink(req, res, project, user)
+    return getLink(req, res, project, user)
   } else if (req.method === 'POST' && project && user) {
-    submitDonation(req, res, project, user)
+    return submitDonation(req, res, project, user)
   } else {
-    res.status(404).send()
+    return res.status(404).send()
   }
-  await db.disconnectDb()
 }
 
 export default donateRoute
