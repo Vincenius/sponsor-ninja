@@ -3918,10 +3918,10 @@
   dependencies:
     "memory-pager" "^1.0.2"
 
-"sponsor-ninja-widget@^1.0.3":
-  "integrity" "sha512-4+KWlCYhRYL+eh22hduQWLYUnWe5+qAuHpbEgLOAcaNsqvu1vLnOD2QHCV4CmuiP18frv+8TMjdnsACmBsTo9Q=="
-  "resolved" "https://registry.npmjs.org/sponsor-ninja-widget/-/sponsor-ninja-widget-1.0.3.tgz"
-  "version" "1.0.3"
+"sponsor-ninja-widget@^1.0.6":
+  "integrity" "sha512-7Z2yZ0OqXcsEHc7uXWEX3sb5A31m0sA87IVz1kfI0J6RDUOtyk6K2FNhVwgOk3R8E6xO8WlpRIQopnSkE9qGfw=="
+  "resolved" "https://registry.npmjs.org/sponsor-ninja-widget/-/sponsor-ninja-widget-1.0.6.tgz"
+  "version" "1.0.6"
   dependencies:
     "@dicebear/collection" "^5.0.2"
     "@dicebear/core" "^5.0.2"
