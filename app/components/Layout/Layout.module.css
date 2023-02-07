@@ -25,3 +25,9 @@
   flex-direction: column;
   justify-content: space-around;
 }
+
+@media screen and (max-width: 600px) {
+  .main {
+    padding: 2rem;
+  }
+}
