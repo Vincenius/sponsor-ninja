@@ -38,14 +38,13 @@ const ProjectPage = ({ pid = '', project = {} }) => {
 export async function getServerSideProps(context) {
   const { pid = '123' } = context.params
   let project = {}
-  console.log(pid)
-  try {
-  project = await fetch(`http://localhost:3000/api/project?id=${pid}`)
-    .then(res => res.json())
-    .catch(err => console.log(err))
-  } catch (err) { }
+  const domain = process.env.NEXT_PUBLIC_STAGE === 'dev'
+    ? 'http://localhost:3000'
+    : 'https://app.sponsor.ninja'
 
-  console.log(project)
+  try {
+    project = await fetch(`${domain}/api/project?id=${pid}`).then(res => res.json())
+  } catch (err) {}
 
   return {
     props: { pid, project }, // will be passed to the page component as props
