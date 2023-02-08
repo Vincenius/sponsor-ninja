@@ -54,6 +54,22 @@ new SponsorNinja({
 - *__alignment__ (default = "center")* : the alignment of the circles
 - *__position__ (default = "bottom")* : the position of the modal
 
+## Steps to Get the Project Running Locally
+1. Clone the repository to your local machine <br>
+   `git clone https://github.com/Vincenius/sponsor-ninja.git`
+2. Navigate to the project directory <br>
+   `cd sponsor-ninja`
+3. Checkout to the appropriate branch if necessary <br>
+   `git checkout develop`
+4. Install the necessary dependencies <br>
+   `npm install`
+5. Create a `.env` file and set environment variables if needed <br>
+6. Run database migrations if necessary <br>
+   `npm run migrate`
+7. Start the local development server <br>
+   `npm start`
+8. Open your browser to http://localhost:3000
+
 ## app 
 [![Built with Next.js](https://img.shields.io/badge/Built%20with-Next.js-brightgreen)](https://nextjs.org/)
 
