@@ -1,9 +1,28 @@
-# Sponsor Ninja
+<div align="center">
+<img src="https://github.com/Vincenius/sponsor-ninja/blob/master/app/public/logo.png?raw=true" width=25% height=25% />
+<h1>Sponsor Ninja</h1>
+<h3><em>An easy & free way to collect sponsorships for your projects</em></h3>
+<p>
+<img src="https://img.shields.io/github/contributors/Vincenius/sponsor-ninja?style=plastic" alt="Contributors">
+<img src="https://img.shields.io/github/forks/Vincenius/sponsor-ninja" alt="Forks">
+<img src="https://img.shields.io/github/stars/Vincenius/sponsor-ninja" alt="Stars">
+<!-- <img src="https://img.shields.io/github/license/Vincenius/sponsor-ninja" alt="Licence"> -->
+<img src="https://img.shields.io/github/issues/Vincenius/sponsor-ninja" alt="Issues">
+<img src="https://img.shields.io/github/languages/count/Vincenius/sponsor-ninja" alt="Languages">
+<img src="https://img.shields.io/github/repo-size/Vincenius/sponsor-ninja" alt="Repository Size">
+</p>
+</div>
 
-An easy & free way to collect sponsorships for your projects.
+## About 
++ Sponsor Ninja is an easy way to collect sponsorships for your projects. 
++ With a simple and intuitive interface, you can quickly and easily set up the sponsorship and manage it.
++ Whether you're a hobbyist or a professional, Sponsor Ninja has everything you need to get a sponsor for your passion project.
 
-You can self-host the project or use the web app on [sponsor.ninja](https://sponsor.ninja). No worries it's free (donation based)!
+## Link
++ You can self-host the project or use the web app on [sponsor.ninja](https://sponsor.ninja). 
++ No worries it's free (donation based)!
 
+## Procedure
 After creating a project on the website you can embed a script to generate the widget.
 
 
@@ -29,19 +48,20 @@ new SponsorNinja({
 })
 ```
 
-
-You can pass following optional options:
+**You can pass following optional options:**
 
 - *__color__ (default = "#0ac3c5")* : the primary color of the widget
 - *__alignment__ (default = "center")* : the alignment of the circles
 - *__position__ (default = "bottom")* : the position of the modal
 
-## app
+## app 
+[![Built with Next.js](https://img.shields.io/badge/Built%20with-Next.js-brightgreen)](https://nextjs.org/)
 
 This is a Next.js application that handles the login and the creation of projects
 
 
 ## widget
+[![Powered by Widget.js](https://img.shields.io/badge/Powered%20by-Widget.js-orange)](https://widgetjs.org/)
 
 This is a webpack project that creates the widget.js and the npm package, which needs to be included on the page
 
@@ -61,11 +81,12 @@ This is a webpack project that creates the widget.js and the npm package, which 
 - add tests
 
 
+## Created By
+<!-- [Vincent Will](https://twitter.com/wweb_dev) -->
+
+### Vincent Will : ![Twitter Follow](https://img.shields.io/twitter/follow/wweb_dev?style=social)
 ## License
-[MIT](https://choosealicense.com/licenses/mit/)
+[![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)
 
 
----
 
-
-*created by [Vincent Will](https://twitter.com/wweb_dev)*
