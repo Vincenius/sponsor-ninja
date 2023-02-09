@@ -36,17 +36,46 @@ You can pass following optional options:
 - *__alignment__ (default = "center")* : the alignment of the circles
 - *__position__ (default = "bottom")* : the position of the modal
 
-## app
+## app directory
 
 This is a Next.js application that handles the login and the creation of projects
 
+### Steps to run it locally
+1. Clone the repository to your local machine <br>
+   `git clone https://github.com/Vincenius/sponsor-ninja.git`
+2. Navigate to the app directory <br>
+   `cd sponsor-ninja/app`
+3. Install the necessary dependencies <br>
+   `npm install`
+4. Setup a MongoDB database with three collections: `users`, `projects` and `donations`
+5. copy the `.env.dist` file to `.env.local` and set environment variables as described in the file<br>
+6. Start the local development server <br>
+   `npm run dev`
+7. Open your browser to http://localhost:3000
 
-## widget
+
+## widget directory
 
 This is a webpack project that creates the widget.js and the npm package, which needs to be included on the page
 
+### Steps to run it locally
+1. Clone the repository to your local machine <br>
+   `git clone https://github.com/Vincenius/sponsor-ninja.git`
+2. Navigate to the app directory <br>
+   `cd sponsor-ninja/widget`
+3. Install the necessary dependencies <br>
+   `npm install`
+4. update the `.env` file with your own values<br>
+5. Start the local development server <br>
+   `npm run dev`
+6. Open the `index.html` in your browser for a widget preview
 
-### next todos
+### Deploy the widget
+1. copy the `/widget/widget.js` into `/app/public/widget.js` to provide the script
+2. publish the updated npm package: https://docs.npmjs.com/cli/v7/commands/npm-publish
+
+
+## Next TODOs
 
 - edit and delete projects
 - static html export of circles for email newsletter embed
@@ -57,7 +86,6 @@ This is a webpack project that creates the widget.js and the npm package, which 
 - email input for payment receipts
 - more payment methods
 - cron job to cleanup old pending donations
-- a hosted page that displays the donations?
 - add tests
 
 
