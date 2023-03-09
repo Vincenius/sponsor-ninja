@@ -16,7 +16,6 @@
 ## About
 + Sponsor Ninja is an easy way to collect sponsorships for your projects.
 + With a simple and intuitive interface, you can quickly and easily set up the sponsorship and manage it.
-+ Whether you're a hobbyist or a professional, Sponsor Ninja has everything you need to get a sponsor for your passion project.
 
 ## Link
 + You can self-host the project or use the web app on [sponsor.ninja](https://sponsor.ninja).
